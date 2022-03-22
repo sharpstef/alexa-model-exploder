@@ -1,17 +1,19 @@
- # Language Model Exploder
-# Last Updated: 3/21/2022
-# 
-# To Run: python model_exploder.py myModel.json
-# Output: csv file with two columns (utterance and intent)
-# 
-# Takes in a language model in any language and outputs a file with 
-# filled utterances for intents that are not AMAZON built-in. Reformats 
-# utterances to lowercase, remove some unnecessary punctuation 
-# (keeps apostophes and periods). Skips AMAZON built-in slots. 
-#
-# It is recommended that you review output to remove any grammatically 
-# incorrect utterances post processing. 
+"""
+ Language Model Exploder
+ Author: Stefania Sharp
+ Last Updated: 3/21/2022
 
+ To Run: python model_exploder.py myModel.json
+ Output: csv file with two columns (utterance and intent)
+ 
+ Takes in a language model in any language and outputs a file with 
+ filled utterances for intents that are not AMAZON built-in. Reformats 
+ utterances to lowercase, remove some unnecessary punctuation 
+ (keeps apostophes and periods). Skips AMAZON built-in slots. 
+
+ It is recommended that you review output to remove any grammatically 
+ incorrect utterances post processing. 
+"""
 #!/usr/bin/python
 
 import itertools
@@ -25,7 +27,7 @@ def importJSON(input):
     try:                                                                           
         data = json.load(input)
 
-        if data.has_key("interactionModel") and data.has_key("languageModel"):
+        if data.has_key("interactionModel") and data["interactionModel"].has_key("languageModel"):
             return data["interactionModel"]["languageModel"]
         else:                                               
             print("Input file is not a supported Alexa language model. Must contain attributes interactionModel and languageModel.")     
@@ -109,7 +111,7 @@ def main():
                     # Check if utterance has no slots
                     if len(matches) < 1:
                         utterance = formatLine(utterance)
-                        outputFile.write(+utterance+","+name+"\n")
+                        outputFile.write(utterance+","+name+"\n")
                     else:
                         for slot in re.findall(regex, utterance):
                             # Slot names do not always match slot types, get the type to compare with stored

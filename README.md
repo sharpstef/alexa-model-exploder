@@ -17,3 +17,13 @@ csv file with two columns (utterance and intent)
 - Skips utterances with AMAZON built-in slots
 - Reformats utterances to remove most punctuation (excluding . and ')
 - Reformats utterances to lowercase
+- Assumes that JSON is formatted in standard custom skill format
+
+## Bugs, issues and enhancements  
+
+This project is presented as-is. 
+
+
+## License  
+  
+The QR Code APL Skill is under the [Apache License 2.0](https://github.com/sharpstef/alexa-model-exploder/blob/main/LICENSE.txt).  
