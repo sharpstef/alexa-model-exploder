@@ -38,7 +38,7 @@ def importJSON(input):
         return None 
 
 def formatLine(line):
-    line = re.sub(r"[^\w\d'.\s]+",'', line) 
+    line = re.sub(r"[^\w\d'.\-\s]+",'', line) 
     line = line.lower()
     line = line.rstrip()
     return line
