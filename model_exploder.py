@@ -85,7 +85,6 @@ def main():
 
     data = data["languageModel"]
     # Object to hold all of the utterances for each intent
-    model = {}
     slots = compressSlots(data)
 
     # Go through each intent and expand the utterances. Skip intents with Amazon built-in slots.
@@ -94,7 +93,6 @@ def main():
 
             # Prep data holders
             name = intent["name"]
-            model[name] = []
 
             # Find all Amazon slots for intent to skip utterances that contain them
             amazonSlots = []
@@ -119,7 +117,7 @@ def main():
                     # Check if utterance has no slots
                     if len(matches) < 1:
                         utterance = formatLine(utterance)
-                        model[name].append(utterance)
+                        outputFile.write(utterance+","+name+"\n")
                     else:
                         for slot in re.findall(regex, utterance):
                             # Slot names do not always match slot types, get the type to compare with stored
